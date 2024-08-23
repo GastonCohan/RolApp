@@ -41,33 +41,34 @@ const SignUp: React.FC = () => {
 
   const handleSignUp = async (event: React.FormEvent) => {
     event.preventDefault();
-
+  
     if (password !== repeatPassword) {
       alert('Passwords do not match');
       return;
     }
-
+  
     if (!acceptedTerms) {
       alert('You must accept the terms and conditions');
       return;
     }
-
+  
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-
+  
       await setDoc(doc(db, 'users', user.uid), {
         uid: user.uid,
         email: user.email,
         role: role,
       });
-
+  
       navigate('/login');
     } catch (error: any) {
       console.error('Error creating user:', error);
       alert('Error signing up: ' + error.message);
     }
   };
+  
 
   return (
     <div className="login-container">

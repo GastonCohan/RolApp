@@ -27,9 +27,8 @@ const Login: React.FC = () => {
     setError(null);
 
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password);
       navigate('/home');
-      console.log(userCredential)
     } catch (error: any) {
       setError('Error logging in: ' + error.message);
     }
