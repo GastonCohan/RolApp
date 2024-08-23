@@ -1,17 +1,38 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import './login-styles.css';
 import InputField from '../../Components/Input/input';
 import Button from '../../Components/Button/button';
 
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebaseConfig';
+import ErrorAlert from '../../Components/ErrorAlert/errorAlert';
+
 const Login: React.FC = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleClickShowPassword = () => setShowPassword((prev) => !prev);
 
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+  };
+
+  const handleLogin = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setError(null);
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      navigate('/home');
+      console.log(userCredential)
+    } catch (error: any) {
+      setError('Error logging in: ' + error.message);
+    }
   };
 
   return (
@@ -20,12 +41,14 @@ const Login: React.FC = () => {
         <div className="login-avatar">
           <Avatar alt="User Avatar" sx={{ width: 80, height: 80, bgcolor: 'rgba(255, 255, 255, 0.3)' }} />
         </div>
-        <form>
+        <form onSubmit={handleLogin}>
           <InputField
             label="Email ID"
             type="text"
-            showPassword={false}
             isPassword={false}
+            showPassword={false}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <InputField
             label="Password"
@@ -34,13 +57,16 @@ const Login: React.FC = () => {
             handleClickShowPassword={handleClickShowPassword}
             handleMouseDownPassword={handleMouseDownPassword}
             isPassword={true}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
+          {error && <ErrorAlert message={error} />}
           <div className="login-options">
             <label>
               <input type="checkbox" />
               Remember me
             </label>
-            <a href="#">Forgot Password?</a>
+            <a>Forgot Password?</a>
           </div>
           <Button type="submit">LOGIN</Button>
         </form>

@@ -15,6 +15,10 @@ body {
   height: 100%;
 }
 
+.login-box form > * {
+  margin-bottom: 16px;
+}
+
 .login-box {
   background: rgba(255, 255, 255, 0.1);
   padding: 20px;

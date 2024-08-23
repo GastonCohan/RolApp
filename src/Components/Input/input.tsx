@@ -14,6 +14,8 @@ interface InputFieldProps {
   handleMouseDownPassword?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   inputRef?: React.RefObject<HTMLInputElement>;
   isPassword?: boolean;
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -24,6 +26,8 @@ const InputField: React.FC<InputFieldProps> = ({
   handleMouseDownPassword,
   inputRef,
   isPassword = false,
+  value,
+  onChange,
 }) => {
   return (
     <TextField
@@ -32,6 +36,8 @@ const InputField: React.FC<InputFieldProps> = ({
       fullWidth
       type={isPassword && showPassword ? 'text' : type}
       inputRef={inputRef}
+      value={value}
+      onChange={onChange}
       InputLabelProps={{ className: 'input-label' }}
       inputProps={{ className: 'input-text' }}
       className="input-field"
