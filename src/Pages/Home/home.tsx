@@ -1,37 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../Context/authContext';
-import { collection, getDocs, addDoc, updateDoc, doc } from 'firebase/firestore';
-import db from '../../firebaseConfig';
 import LoadingSpinner from '../../Components/LoadingSpinner/loadingSpinner';
-import './home-styles.css'
+import './home-styles.css';
 import { ProductInterface } from '../../Interfaces/product-interface';
 import Product from '../../Components/Product/product';
+import { addProduct, editProduct, fetchProducts } from '../../Helpers/productHelper';
+import { handleLogout } from '../../Helpers/authHelper';
 
 const Home: React.FC = () => {
-  const { role, loading, logout } = useAuth();
+  const { role, loading } = useAuth();
   const [products, setProducts] = useState<ProductInterface[]>([]);
   const [newProduct, setNewProduct] = useState<ProductInterface>({ name: '', description: '', price: 0 });
   const [editingProduct, setEditingProduct] = useState<ProductInterface | null>(null);
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const querySnapshot = await getDocs(collection(db, 'products'));
-      const productsList: ProductInterface[] = [];
-      querySnapshot.forEach((doc) => {
-        productsList.push({ id: doc.id, ...doc.data() } as ProductInterface);
-      });
+    const loadProducts = async () => {
+      const productsList = await fetchProducts();
       setProducts(productsList);
     };
 
-    fetchProducts();
+    loadProducts();
   }, []);
 
   const handleAddProduct = async () => {
     setIsSaving(true);
     try {
-      const docRef = await addDoc(collection(db, 'products'), newProduct);
-      setProducts([...products, { id: docRef.id, ...newProduct }]);
+      const newProductId = await addProduct(newProduct);
+      setProducts([...products, { id: newProductId, ...newProduct }]);
       setNewProduct({ name: '', description: '', price: 0 });
     } catch (error) {
       console.error('Error adding product:', error);
@@ -44,13 +40,12 @@ const Home: React.FC = () => {
     if (editingProduct && editingProduct.id) {
       setIsSaving(true);
       try {
-        const productDoc = doc(db, 'products', editingProduct.id);
         const updatedProductData = {
           name: editingProduct.name,
           description: editingProduct.description,
           price: editingProduct.price,
         };
-        await updateDoc(productDoc, updatedProductData);
+        await editProduct(editingProduct.id, updatedProductData);
         setProducts(
           products.map((prod) =>
             prod.id === editingProduct.id ? { ...prod, ...updatedProductData } : prod
@@ -68,14 +63,6 @@ const Home: React.FC = () => {
   if (loading) {
     return <LoadingSpinner />;
   }
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-    } catch (error) {
-      console.error('Error logging out:', error);
-    }
-  };
 
   return (
     <div>
