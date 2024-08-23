@@ -1,64 +1,66 @@
 .product-card {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    margin: 16px;
-    transition: transform 0.3s ease;
-    max-width: 300px;
-  }
-  
-  .product-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .product-content {
-    padding: 16px;
-    text-align: left;
-  }
-  
-  .product-name {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin: 0;
-    color: #333333;
-  }
-  
-  .product-description {
-    font-size: 0.9rem;
-    color: #666666;
-    margin: 8px 0 16px;
-  }
-  
-  .product-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .product-price {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #2196F3;
-  }
-  
-  .product-edit-button {
-    background-color: #2196F3;
-    color: #ffffff;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .product-edit-button:hover {
-    background-color: #1976D2;
-  }
-  
-  .product-edit-button:focus {
-    outline: none;
-  }
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: 16px;
+  transition: transform 0.3s ease;
+  width: 300px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
-  
-  
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-content {
+  padding: 16px;
+  text-align: left;
+  flex-grow: 1;
+}
+
+.product-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0;
+  color: #333333;
+}
+
+.product-description {
+  font-size: 0.9rem;
+  color: #666666;
+  margin: 8px 0 16px;
+}
+
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product-price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #2196F3;
+}
+
+.product-edit-button {
+  background-color: #2196F3;
+  color: #ffffff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.product-edit-button:hover {
+  background-color: #1976D2;
+}
+
+.product-edit-button:focus {
+  outline: none;
+}

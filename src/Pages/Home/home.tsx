@@ -65,9 +65,12 @@ const Home: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1>Home</h1>
-      <p>Welcome! You are logged in as: <strong>{role}</strong></p>
+    <div className="home-container">
+      <div className="home-header">
+        <h1>Home</h1>
+        <p>Welcome! You are logged in as: <strong>{role}</strong></p>
+      </div>
+
       <div className="products-grid">
         <h2>Products</h2>
         {products.map((product) => (
@@ -121,7 +124,7 @@ const Home: React.FC = () => {
         </div>
       )}
 
-      <button onClick={handleLogout}>Logout</button>
+      <button className="logout-button" onClick={handleLogout}>Logout</button>
     </div>
   );
 };
