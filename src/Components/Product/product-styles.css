@@ -6,7 +6,7 @@
   margin: 16px;
   transition: transform 0.3s ease;
   width: 300px;
-  height: 150px;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -39,6 +39,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 12px;
 }
 
 .product-price {
@@ -63,4 +64,49 @@
 
 .product-edit-button:focus {
   outline: none;
+}
+
+.product-edit-input {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 6px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.product-edit-input:focus {
+  outline: none;
+  border-color: #2196F3;
+}
+
+.product-save-button {
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 8px;
+}
+
+.product-save-button:hover {
+  background-color: #388E3C;
+}
+
+.product-cancel-button {
+  background-color: #FF6B6B;
+  color: #ffffff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.product-cancel-button:hover {
+  background-color: #E53935;
 }

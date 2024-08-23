@@ -5,15 +5,14 @@ import Home from './Pages/Home/home';
 import Login from './Pages/Login/login';
 import SignUp from './Pages/SignUp/signUp';
 import { AuthProvider, useAuth } from './Context/authContext';
+import AdminPanel from './Pages/AdminPanel/adminPanel';
 
 const App: React.FC = () => {
-  const {user } = useAuth();
-
   return (
     <AuthProvider>
       <Routes>
-        <Route path="/login" element={user ? <Navigate to="/home" /> : <Login />} />
-        <Route path="/sign-up" element={user ? <Navigate to="/home" /> : <SignUp />} />
+        <Route path="/login" element={<LoginRedirect />} />
+        <Route path="/sign-up" element={<SignUpRedirect />} />
         <Route
           path="/home"
           element={
@@ -22,10 +21,28 @@ const App: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        <Route path="*" element={<Navigate to={user ? "/home" : "/login"} />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <AdminPanel />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
     </AuthProvider>
   );
+};
+
+const LoginRedirect: React.FC = () => {
+  const { user } = useAuth();
+  return user ? <Navigate to="/home" /> : <Login />;
+};
+
+const SignUpRedirect: React.FC = () => {
+  const { user } = useAuth();
+  return user ? <Navigate to="/home" /> : <SignUp />;
 };
 
 export default App;
