@@ -11,11 +11,14 @@ import { handleLogout } from '../../Helpers/authHelper';
 const Home: React.FC = () => {
   const { role, loading } = useAuth();
   const [products, setProducts] = useState<ProductInterface[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1); // Página actual
+  const [productsPerPage] = useState(4); // Número de productos por página
 
   useEffect(() => {
     loadProducts();
   }, []);
-  
+
   const loadProducts = async () => {
     const productsList = await fetchProducts();
     setProducts(productsList);
@@ -29,6 +32,19 @@ const Home: React.FC = () => {
     );
   };
 
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    product.description.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -40,10 +56,17 @@ const Home: React.FC = () => {
       <Header />
       <div className="home-header">
         <p>Welcome! You are logged in as: <strong>{role}</strong></p>
+        <input
+          type="text"
+          placeholder="Search products..."
+          className="search-input"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       </div>
 
       <div className="products-grid">
-        {products.map((product) => (
+        {currentProducts.map((product) => (
           <Product
             key={product.id}
             id={product.id}
@@ -53,6 +76,18 @@ const Home: React.FC = () => {
             isAdmin={role === 'admin'}
             onProductUpdate={updateProductInList}
           />
+        ))}
+      </div>
+
+      <div className="pagination">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index + 1}
+            onClick={() => paginate(index + 1)}
+            className={`pagination-button ${currentPage === index + 1 ? 'active' : ''}`}
+          >
+            {index + 1}
+          </button>
         ))}
       </div>
     </div>
