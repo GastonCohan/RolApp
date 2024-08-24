@@ -76,6 +76,7 @@ const Home: React.FC = () => {
               onProductUpdate={updateProductInList}
             />
           ))}
+        </div>
       <div className="pagination">
         {Array.from({ length: totalPages }, (_, index) => (
           <button
@@ -87,7 +88,6 @@ const Home: React.FC = () => {
           </button>
         ))}
       </div>
-        </div>
       </div>
 
     </div>
