@@ -5,6 +5,7 @@ import { editProduct } from '../../Helpers/productHelper';
 
 interface ProductProps extends ProductInterface {
   onProductUpdate: (updatedProduct: ProductInterface) => void;
+  onProductDelete: (productId: string) => void;
   isAdmin?: boolean;
 }
 
@@ -14,7 +15,8 @@ const Product: React.FC<ProductProps> = ({
   description,
   price,
   isAdmin,
-  onProductUpdate
+  onProductUpdate,
+  onProductDelete,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedName, setEditedName] = useState(name);
@@ -32,7 +34,7 @@ const Product: React.FC<ProductProps> = ({
         };
 
         await editProduct(id, updatedProduct);
-        
+
         onProductUpdate(updatedProduct);
 
         setIsEditing(false);
@@ -89,9 +91,14 @@ const Product: React.FC<ProductProps> = ({
           <div className="product-footer">
             <span className="product-price">${price.toFixed(2)}</span>
             {isAdmin && (
-              <button className="product-edit-button" onClick={() => setIsEditing(true)}>
-                Edit
-              </button>
+              <>
+                <button className="product-edit-button" onClick={() => setIsEditing(true)}>
+                  Edit
+                </button>
+                <button className="product-delete-button" onClick={() => onProductDelete(id!)}>
+                  🗑️
+                </button>
+              </>
             )}
           </div>
         </div>

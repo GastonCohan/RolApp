@@ -5,7 +5,7 @@ import Header from '../../Components/Header/header';
 import './home-styles.css';
 import { ProductInterface } from '../../Interfaces/product-interface';
 import Product from '../../Components/Product/product';
-import { fetchProducts } from '../../Helpers/productHelper';
+import { fetchProducts, deleteProduct } from '../../Helpers/productHelper';
 
 const Home: React.FC = () => {
   const { role, loading } = useAuth();
@@ -13,10 +13,11 @@ const Home: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(4);
+  const [productToDelete, setProductToDelete] = useState<ProductInterface | null>(null);
 
   useEffect(() => {
     loadProducts();
-  }, []);
+  }, [role]);
 
   const loadProducts = async () => {
     const productsList = await fetchProducts();
@@ -29,6 +30,33 @@ const Home: React.FC = () => {
         product.id === updatedProduct.id ? updatedProduct : product
       )
     );
+  };
+
+  const deleteProductFromList = async (productId: string) => {
+    try {
+      // Eliminar el producto de Firebase
+      await deleteProduct(productId);
+
+      // Actualizar el estado local
+      setProducts((prevProducts) => prevProducts.filter((product) => product.id !== productId));
+      setProductToDelete(null); // Cerrar el modal después de la eliminación
+    } catch (error) {
+      console.error('Error deleting product:', error);
+    }
+  };
+
+  const handleDeleteConfirmation = (product: ProductInterface) => {
+    setProductToDelete(product);
+  };
+
+  const confirmDelete = () => {
+    if (productToDelete) {
+      deleteProductFromList(productToDelete.id!);
+    }
+  };
+
+  const cancelDelete = () => {
+    setProductToDelete(null);
   };
 
   const filteredProducts = products.filter((product) =>
@@ -74,22 +102,37 @@ const Home: React.FC = () => {
               price={product.price}
               isAdmin={role === 'admin'}
               onProductUpdate={updateProductInList}
+              onProductDelete={() => handleDeleteConfirmation(product)} // Se pasa la función para manejar la eliminación
             />
           ))}
         </div>
-      <div className="pagination">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index + 1}
-            onClick={() => paginate(index + 1)}
-            className={`pagination-button ${currentPage === index + 1 ? 'active' : ''}`}
-          >
-            {index + 1}
-          </button>
-        ))}
-      </div>
+        <div className="pagination">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => paginate(index + 1)}
+              className={`pagination-button ${currentPage === index + 1 ? 'active' : ''}`}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
       </div>
 
+      {/* Modal de confirmación de eliminación */}
+      {productToDelete && (
+        <div className="delete-confirm-modal">
+          <div className="delete-confirm-content">
+            <p>Are you sure you want to delete {productToDelete.name}?</p>
+            <button className="confirm-button" onClick={confirmDelete}>
+              Yes, Delete
+            </button>
+            <button className="cancel-button" onClick={cancelDelete}>
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

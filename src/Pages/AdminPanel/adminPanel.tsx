@@ -9,15 +9,29 @@ const AdminPanel: React.FC = () => {
   const [newProduct, setNewProduct] = useState<ProductInterface>({ name: '', description: '', price: 0 });
   const [editingProduct, setEditingProduct] = useState<ProductInterface | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+  const handleValidation = () => {
+    if (!newProduct.name || !newProduct.description || newProduct.price <= 0) {
+      setErrorMessage('All fields must be completed correctly.');
+      return false;
+    }
+    setErrorMessage(null);
+    return true;
+  };
 
   const handleAddProduct = async () => {
+    if (!handleValidation()) return;
+
     setIsSaving(true);
     try {
       const newProductId = await addProduct(newProduct);
       setProducts([...products, { id: newProductId, ...newProduct }]);
       setNewProduct({ name: '', description: '', price: 0 });
+      setSuccessMessage('Product created successfully!');
     } catch (error) {
-      console.error('Error adding product:', error);
+      setErrorMessage('Error adding product. Please try again.');
     } finally {
       setIsSaving(false);
     }
@@ -25,6 +39,8 @@ const AdminPanel: React.FC = () => {
 
   const handleEditProduct = async () => {
     if (editingProduct && editingProduct.id) {
+      if (!handleValidation()) return;
+
       setIsSaving(true);
       try {
         const updatedProductData = {
@@ -39,8 +55,9 @@ const AdminPanel: React.FC = () => {
           )
         );
         setEditingProduct(null);
+        setSuccessMessage('Product updated successfully!');
       } catch (error) {
-        console.error('Error editing product:', error);
+        setErrorMessage('Error editing product. Please try again.');
       } finally {
         setIsSaving(false);
       }
@@ -53,6 +70,8 @@ const AdminPanel: React.FC = () => {
       <h1>Admin Panel</h1>
       <div className="product-form">
         <h2>{editingProduct ? 'Edit Product' : 'Add Product'}</h2>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+        {successMessage && <p className="success-message">{successMessage}</p>}
         <input
           type="text"
           placeholder="Product Name"

@@ -139,3 +139,15 @@
 .product-delete-button:hover {
   background-color: #E53935;
 }
+
+.error-message {
+  color: #FF6B6B;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.success-message {
+  color: #4CAF50;
+  font-weight: bold;
+  margin-bottom: 10px;
+}

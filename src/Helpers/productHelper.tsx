@@ -1,4 +1,4 @@
-import { collection, getDocs, addDoc, updateDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase/firestore';
 import db from '../firebaseConfig';
 import { ProductInterface } from '../Interfaces/product-interface';
 
@@ -19,4 +19,9 @@ export const addProduct = async (newProduct: ProductInterface): Promise<string> 
 export const editProduct = async (productId: string, updatedProductData: Partial<ProductInterface>) => {
   const productDoc = doc(db, 'products', productId);
   await updateDoc(productDoc, updatedProductData);
+};
+
+export const deleteProduct = async (productId: string): Promise<void> => {
+  const productRef = doc(db, 'products', productId);
+  await deleteDoc(productRef);
 };
