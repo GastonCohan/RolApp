@@ -58,17 +58,20 @@ const Product: React.FC<ProductProps> = ({
             className="product-edit-input"
             value={editedName}
             onChange={(e) => setEditedName(e.target.value)}
+            placeholder="Product Name"
           />
           <textarea
             className="product-edit-input"
             value={editedDescription}
             onChange={(e) => setEditedDescription(e.target.value)}
+            placeholder="Product Description"
           />
           <input
             type="number"
             className="product-edit-input"
             value={editedPrice}
             onChange={(e) => setEditedPrice(parseFloat(e.target.value))}
+            placeholder="Product Price"
           />
           <div className="product-footer">
             <button className="product-save-button" onClick={handleSave}>

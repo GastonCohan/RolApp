@@ -8,17 +8,19 @@ const Header: React.FC = () => {
 
   return (
     <header className="header-container">
-      <nav>
-        <ul>
+      <nav className="header-nav">
+        <ul className="left-menu">
           <li>
             <Link to="/home">Home</Link>
           </li>
-          {role === 'admin' && (
+        </ul>
+        {role === 'admin' && (
+          <ul className="right-menu">
             <li>
               <Link to="/admin">Admin Panel</Link>
             </li>
-          )}
-        </ul>
+          </ul>
+        )}
       </nav>
     </header>
   );

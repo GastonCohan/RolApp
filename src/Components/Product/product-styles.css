@@ -1,112 +1,176 @@
 .product-card {
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  margin: 16px;
-  transition: transform 0.3s ease;
-  width: 300px;
-  height: auto;
+  background-color: #333;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  min-width: 250px;
+  max-width: 250px;
+  height: auto;
 }
 
 .product-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-7px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
 }
 
 .product-content {
-  padding: 16px;
-  text-align: left;
-  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
 }
 
 .product-name {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: bold;
+  color: #61dafb;
   margin: 0;
-  color: #333333;
 }
 
 .product-description {
-  font-size: 0.9rem;
-  color: #666666;
-  margin: 8px 0 16px;
+  font-size: 1rem;
+  color: #bbb;
+  margin-bottom: 12px;
+  flex-grow: 1;
 }
 
 .product-footer {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  margin-top: 12px;
+  margin-top: auto;
 }
 
 .product-price {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   font-weight: bold;
-  color: #2196F3;
-}
-
-.product-edit-button {
-  background-color: #2196F3;
-  color: #ffffff;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.product-edit-button:hover {
-  background-color: #1976D2;
-}
-
-.product-edit-button:focus {
-  outline: none;
+  color: #00ADB5;
 }
 
 .product-edit-input {
-  width: 100%;
-  margin-bottom: 8px;
-  padding: 6px;
-  font-size: 0.9rem;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
-  color: #333;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #555;
+  background-color: #444;
+  color: #fff;
+  transition: border 0.3s ease;
 }
 
 .product-edit-input:focus {
+  border: 1px solid #61dafb;
   outline: none;
-  border-color: #2196F3;
+}
+
+.product-save-button,
+.product-cancel-button,
+.product-edit-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px;
 }
 
 .product-save-button {
-  background-color: #4CAF50;
-  color: #ffffff;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-right: 8px;
+  background-color: #28a745;
+  color: #fff;
 }
 
 .product-save-button:hover {
-  background-color: #388E3C;
+  background-color: #218838;
 }
 
 .product-cancel-button {
-  background-color: #FF6B6B;
-  color: #ffffff;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  background-color: #dc3545;
+  color: #fff;
 }
 
 .product-cancel-button:hover {
-  background-color: #E53935;
+  background-color: #c82333;
+}
+
+.product-edit-button {
+  background-color: #ffc107;
+  color: #333;
+  margin-top: 12px;
+  width: 100%; 
+  text-align: center;
+}
+
+.product-edit-button:hover {
+  background-color: #e0a800;
+}
+
+.products-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  background-color: #393E46;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin-bottom: 24px;
+}
+
+.products-grid h2 {
+  grid-column: 1 / -1;
+  font-size: 1.8rem;
+  color: #61dafb;
+  text-align: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.header-container {
+  background-color: #1e1e2f;
+  padding: 15px 30px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.home-container {
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Arial', sans-serif;
+  background-color: #282C34;
+  color: #fff;
+  min-height: 100vh;
+  width: 100%;
 }

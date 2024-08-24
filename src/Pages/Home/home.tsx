@@ -41,7 +41,6 @@ const Home: React.FC = () => {
       </div>
 
       <div className="products-grid">
-        <h2>Products</h2>
         {products.map((product) => (
           <Product
             key={product.id}
