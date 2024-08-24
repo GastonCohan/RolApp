@@ -11,8 +11,8 @@ const Home: React.FC = () => {
   const { role, loading } = useAuth();
   const [products, setProducts] = useState<ProductInterface[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [currentPage, setCurrentPage] = useState(1); // Página actual
-  const [productsPerPage] = useState(4); // Número de productos por página
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(4);
 
   useEffect(() => {
     loadProducts();

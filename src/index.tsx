@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename="/">
+   <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/RolApp' : '/'}>
       <App />
     </BrowserRouter>
   </React.StrictMode>
