@@ -53,8 +53,7 @@ const Home: React.FC = () => {
   return (
     <div className={containerClass}>
       <Header />
-      <div className="home-header">
-        <p>Welcome! You are logged in as: <strong>{role}</strong></p>
+      <div className="role-search-container">
         <input
           type="text"
           placeholder="Search products..."
@@ -64,18 +63,20 @@ const Home: React.FC = () => {
         />
       </div>
 
-      <div className="products-grid">
-        {currentProducts.map((product) => (
-          <Product
-            key={product.id}
-            id={product.id}
-            name={product.name}
-            description={product.description}
-            price={product.price}
-            isAdmin={role === 'admin'}
-            onProductUpdate={updateProductInList}
-          />
-        ))}
+      <div className="products-container">
+        <div className="products-grid">
+          {currentProducts.map((product) => (
+            <Product
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              description={product.description}
+              price={product.price}
+              isAdmin={role === 'admin'}
+              onProductUpdate={updateProductInList}
+            />
+          ))}
+        </div>
       </div>
 
       <div className="pagination">
