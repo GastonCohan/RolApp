@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/RolApp/static/css/main.ab6b9a29.css",
-    "main.js": "/RolApp/static/js/main.1cc62a2f.js",
+    "main.css": "/RolApp/static/css/main.31e11909.css",
+    "main.js": "/RolApp/static/js/main.d40fb034.js",
     "static/js/453.eaa6bbdd.chunk.js": "/RolApp/static/js/453.eaa6bbdd.chunk.js",
     "index.html": "/RolApp/index.html",
-    "main.ab6b9a29.css.map": "/RolApp/static/css/main.ab6b9a29.css.map",
-    "main.1cc62a2f.js.map": "/RolApp/static/js/main.1cc62a2f.js.map",
+    "main.31e11909.css.map": "/RolApp/static/css/main.31e11909.css.map",
+    "main.d40fb034.js.map": "/RolApp/static/js/main.d40fb034.js.map",
     "453.eaa6bbdd.chunk.js.map": "/RolApp/static/js/453.eaa6bbdd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ab6b9a29.css",
-    "static/js/main.1cc62a2f.js"
+    "static/css/main.31e11909.css",
+    "static/js/main.d40fb034.js"
   ]
 }
