@@ -6,7 +6,6 @@ import './home-styles.css';
 import { ProductInterface } from '../../Interfaces/product-interface';
 import Product from '../../Components/Product/product';
 import { fetchProducts } from '../../Helpers/productHelper';
-import { handleLogout } from '../../Helpers/authHelper';
 
 const Home: React.FC = () => {
   const { role, loading } = useAuth();
