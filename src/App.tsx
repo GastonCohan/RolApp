@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from './Context/protectedRoute';
 import Home from './Pages/Home/home';
 import Login from './Pages/Login/login';
@@ -10,27 +10,29 @@ import AdminPanel from './Pages/AdminPanel/adminPanel';
 const App: React.FC = () => {
   return (
     <AuthProvider>
-      <Routes>
-        <Route path="/login" element={<LoginRedirect />} />
-        <Route path="/sign-up" element={<SignUpRedirect />} />
-        <Route
-          path="/home"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute requiredRole="admin">
-              <AdminPanel />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="*" element={<Navigate to="/home" />} />
-      </Routes>
+      <Router basename="/RolApp">
+        <Routes>
+          <Route path="/login" element={<LoginRedirect />} />
+          <Route path="/sign-up" element={<SignUpRedirect />} />
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AdminPanel />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<Navigate to="/home" />} />
+        </Routes>
+      </Router>
     </AuthProvider>
   );
 };
