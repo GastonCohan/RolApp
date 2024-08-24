@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../Context/authContext';
+import { handleLogout } from '../../Helpers/authHelper';
 import './header-styles.css';
 
 const Header: React.FC = () => {
@@ -13,14 +14,17 @@ const Header: React.FC = () => {
           <li>
             <Link to="/home">Home</Link>
           </li>
-        </ul>
-        {role === 'admin' && (
-          <ul className="right-menu">
+          {role === 'admin' && (
             <li>
               <Link to="/admin">Admin Panel</Link>
             </li>
-          </ul>
-        )}
+          )}
+        </ul>
+        <ul className="right-menu">
+          <li>
+            <button className="logout-button" onClick={handleLogout}>Logout</button>
+          </li>
+        </ul>
       </nav>
     </header>
   );

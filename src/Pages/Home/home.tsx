@@ -13,13 +13,13 @@ const Home: React.FC = () => {
   const [products, setProducts] = useState<ProductInterface[]>([]);
 
   useEffect(() => {
-    const loadProducts = async () => {
-      const productsList = await fetchProducts();
-      setProducts(productsList);
-    };
-
     loadProducts();
   }, []);
+  
+  const loadProducts = async () => {
+    const productsList = await fetchProducts();
+    setProducts(productsList);
+  };
 
   const updateProductInList = (updatedProduct: ProductInterface) => {
     setProducts((prevProducts) =>
@@ -33,8 +33,10 @@ const Home: React.FC = () => {
     return <LoadingSpinner />;
   }
 
+  const containerClass = role === 'admin' ? 'home-container admin' : 'home-container guest';
+
   return (
-    <div className="home-container">
+    <div className={containerClass}>
       <Header />
       <div className="home-header">
         <p>Welcome! You are logged in as: <strong>{role}</strong></p>
@@ -53,8 +55,6 @@ const Home: React.FC = () => {
           />
         ))}
       </div>
-
-      <button className="logout-button" onClick={handleLogout}>Logout</button>
     </div>
   );
 };

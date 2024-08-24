@@ -60,13 +60,6 @@ const Login: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           {error && <ErrorAlert message={error} />}
-          <div className="login-options">
-            <label>
-              <input type="checkbox" />
-              Remember me
-            </label>
-            <a>Forgot Password?</a>
-          </div>
           <Button type="submit">LOGIN</Button>
         </form>
         <div className="signup-link">
