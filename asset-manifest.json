@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.1b48d8fc.css",
-    "main.js": "/static/js/main.d1fbbd61.js",
-    "static/js/453.eaa6bbdd.chunk.js": "/static/js/453.eaa6bbdd.chunk.js",
-    "index.html": "/index.html",
-    "main.1b48d8fc.css.map": "/static/css/main.1b48d8fc.css.map",
-    "main.d1fbbd61.js.map": "/static/js/main.d1fbbd61.js.map",
-    "453.eaa6bbdd.chunk.js.map": "/static/js/453.eaa6bbdd.chunk.js.map"
+    "main.css": "/RolApp/static/css/main.1b48d8fc.css",
+    "main.js": "/RolApp/static/js/main.9f6346b3.js",
+    "static/js/453.eaa6bbdd.chunk.js": "/RolApp/static/js/453.eaa6bbdd.chunk.js",
+    "index.html": "/RolApp/index.html",
+    "main.1b48d8fc.css.map": "/RolApp/static/css/main.1b48d8fc.css.map",
+    "main.9f6346b3.js.map": "/RolApp/static/js/main.9f6346b3.js.map",
+    "453.eaa6bbdd.chunk.js.map": "/RolApp/static/js/453.eaa6bbdd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1b48d8fc.css",
-    "static/js/main.d1fbbd61.js"
+    "static/js/main.9f6346b3.js"
   ]
 }
